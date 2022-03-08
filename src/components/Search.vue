@@ -5,7 +5,7 @@
       type="text"
       v-model="title"
       placeholder="Search for Movies, Seriesss & more"
-      @keyup="apply" />
+      @keyup.enter="apply" />
     <div class="selects">
       <select
         v-for="filter in filters"
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+
 export default {
   data(){
     return {
@@ -66,14 +66,13 @@ export default {
   },
   methods : {
     async apply(){
-      const API_KEY = '4af0b287';
-      try{
-      const res = await axios.get(`https://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}&s=${this.title}&type=${this.type}&y=${this.year}&page=1`)
-      console.log(res);
-      } catch(error){
-        console.log(error)
-      }
-      
+      console.log('apply')
+      this.$store.dispatch('movie/searchMovies', {
+        title:this.title,
+        type:this.type,
+        number: this.number,
+        year :this.year
+      })      
     }
   }
 }

@@ -61,3 +61,5 @@ npm i vue-router@4
 
  ## npm i axios
  api call
+
+ ## npm i vuex@next
