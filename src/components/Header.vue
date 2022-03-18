@@ -9,16 +9,25 @@
         <RouterLink
           class="nav-link"
           active-class="active"
+          :class="{active: isMatch(nav.path)}"
           :to="nav.href">
           {{ nav.name }}
         </RouterLink>
       </div>
+    </div>
+    <div
+      class="user"
+      @click="toAbout">
+      <img
+        :src="image"
+        :alt="name" />
     </div>
   </header>
 </template>
 
 <script>
 import Logo from './Logo.vue'
+import {mapState} from 'vuex';
 export default {
   components: {
     Logo
@@ -32,13 +41,29 @@ export default {
         },
         {
           name : 'Movie',
-          href : '/movie'
+          href : '/movie/tt4520988',
+          path : /^\/movie/ // ^(시작)`\(escape)/movie`
         },
         {
           name : 'About',
           href : '/about'
         },
       ]
+    }
+  },
+  computed: {
+    ...mapState('about',[
+      'image',
+      'name'
+    ])
+  },
+  methods: {
+    isMatch(path){
+      if(!path) return;
+      return path.test(this.$route.fullPath);
+    },
+    toAbout(){
+      this.$router.push('/about')
     }
   }
 }
@@ -50,8 +75,35 @@ header {
   padding : 0 40px;
   display: flex;
   align-items: center;
+  position:relative;
   .logo {
     margin-right :40px;
+  }
+  .user {
+    width:40px;
+    height:40px;
+    padding:6px;
+    border-radius: 50px;
+    box-sizing: border-box;
+    background-color: $gray-200 ;
+    cursor: pointer;
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:40px;
+    margin: auto;
+    transition:  .4s;
+    &:hover {
+      background-color:  darken($gray-200, 10%);
+    }
+    img {
+      width:100%
+    }
+  }
+  @include media-breakpoint-down(sm){
+    .nav {
+      display : none;
+    }
   }
 }
 </style>
