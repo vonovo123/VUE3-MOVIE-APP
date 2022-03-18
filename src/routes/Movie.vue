@@ -79,6 +79,7 @@
 
 <script>
 import Loader from '~/components/Loader'
+import {mapState} from 'vuex'
 export default {
   components: {
     Loader
@@ -94,13 +95,10 @@ export default {
     }
   },
   computed: {
-    theMovie(){
-      console.log(this.$store.state.movie.theMovie)
-      return this.$store.state.movie.theMovie
-    },
-    loading(){
-      return this.$store.state.movie.loading;
-    }
+    ...mapState('movie', [
+      'theMovie',
+      'loading'
+    ])
   },
   methods : {
     requestDiffSizeImage(url, size = 700){
@@ -111,7 +109,6 @@ export default {
       const src = url.replace('SX300', `SX${size}`);
       this.$loadImage(src)
         .then(() => {
-          console.log(`load`);
           this.imageLoading = false;
         });
       return src
@@ -121,7 +118,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~/scss/main";
   .container {
     padding-top: 40px;
   }
@@ -223,6 +219,34 @@ export default {
       }
 
     }
+    @include media-breakpoint-down(xl){
+      .poster{
+        width: 300px;
+        height: 300px * 3 / 2;
+        margin-right:40px;
+      }
+    }
+    @include media-breakpoint-down(lg){
+      display:block;
+      .poster{
+        margin-bottom:40px;
+      }
+    }
 
+    @include media-breakpoint-down(md){
+      .specs{
+          .title {
+            font-size:50px;
+          }
+      }
+      .ratings {
+        .ratings-wrap {
+          display:block;
+          .rating{
+            margin-top:10px;
+          }
+        }
+      }
+    }
   }
 </style>
