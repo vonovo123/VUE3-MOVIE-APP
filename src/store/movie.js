@@ -36,7 +36,6 @@ export default {
       try{
         const res = await _fetchMovie({...payload, page : 1})
         const {Search, totalResults} = res.data;
-        console.log(res.data);
         commit('updateState', {
           movies : _uniqBy(Search, 'imdbID')
         });
@@ -56,8 +55,8 @@ export default {
             })
           }
         }
-      } catch(message){
-        console.log(message);
+      } catch({message}){
+        console.log(`message : ${message}`)
         commit('updateState',{
           movies:[],
           message
@@ -77,14 +76,13 @@ export default {
       const {id} = payload;
       try {
         const res = await _fetchMovie({id})
-        console.log(res.data);
         commit('updateState', {
           theMovie : res.data
         })
-      } catch (error) {
+      } catch ({message}) {
         commit('updateState', {
           theMovie : {},
-          message : ''
+          message
         })
       }finally {
         commit('updateState', {
@@ -95,24 +93,6 @@ export default {
   }
 }
 
-function _fetchMovie(payLoad){
-  const {title, type, year, page, id} = payLoad;
-  const API_KEY = '4af0b287';
-  const url = id
-   ?`https://www.omdbapi.com/?apikey=${API_KEY}&i=${id}` 
-   :`https://www.omdbapi.com/?apikey=${API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`
-  //const url = `https://www.omdbapi.com/?&apikey=${API_KEY}`;
-  return new Promise((rs, rj)=>{
-    axios.get(url)
-    .then(res => {
-      console.log(res);
-      if(res.data.Error){
-        rj(res.data.Error);
-      }
-      rs(res)
-    })
-    .catch(err => {
-      rj(err.message);
-    })
-  })
+async function _fetchMovie(payLoad){
+  return await axios.post('/.netlify/functions/movie', payLoad)
 }

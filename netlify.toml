@@ -1,2 +1,12 @@
-[functions]
-  directory = "my_functions"
+[build]
+  command = "npm run build"
+  functions = "my_functions"
+  publish = "dist"
+
+[dev]
+  framework = "#custom"
+  command = "npm run dev:webpack"
+  targetPort = 8079
+  port = 8080
+  publish = "dist"
+  autoLaunch = false
