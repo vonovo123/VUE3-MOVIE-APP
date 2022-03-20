@@ -63,3 +63,9 @@ npm i vue-router@4
  api call
 
  ## npm i vuex@next
+
+ ## npm i -D netlify_cli
+
+ ## npm i -D dotenv-webpack
+
+ ## netlify site settings - build & deploy - environment
