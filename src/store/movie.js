@@ -41,7 +41,6 @@ export default {
         });
         const total = parseInt(totalResults, 10);
         const pageLength = Math.ceil(total / 10);
-        console.log('pageLength', pageLength)
         //추가 요청!
         if(pageLength > 1){
           for(let page = 2; page <= pageLength; page +=1){
@@ -56,7 +55,6 @@ export default {
           }
         }
       } catch({message}){
-        console.log(`message : ${message}`)
         commit('updateState',{
           movies:[],
           message

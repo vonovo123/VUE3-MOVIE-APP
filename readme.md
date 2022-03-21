@@ -68,10 +68,42 @@ npm i vue-router@4
  ## npm i axios
  api call
 
- ## npm i vuex@next
+ ##  vuex 설치
+ npm i vuex@next
 
- ## npm i -D netlify_cli
+## serverless 함수 사용을 위한 netlify_cli 설치
+ npm i -D netlify_cli
 
- ## npm i -D dotenv-webpack
+## 중요 설정정보 서버단에 감추기위한 프레임웍 설치
+npm i -D dotenv-webpack
 
- ## netlify site settings - build & deploy - environment
+ ## 호스팅서버(netlify)에서 중요 key 사용할 수 있도록 등록
+ netlify site settings - build & deploy - environment - Environment variables 등록
+
+
+ ## 단위테스트
+
+  ### Unit TEST
+    데이터 ,함수, 컴포넌트등의 정의된 프로그램 단위들이 독립적으로 동작하는지 확인하는 방법.
+    - Jest
+    - Vue Test Utils
+
+  #### 의존성 설치
+    npm i -D jest @vue/test-utils@next vue-jest@next babel-jest
+  #### test method 사용을 위해 eslint 수정
+   - eslint.js env => jest : true
+
+  #### vue-test-utils
+  
+  ### E2E Test
+    애플리케이션의 처음부터 끝까지 실제 사용자의 관점에서 사용 흐름을 테스트하는 방법   
+  - Cypress
+  - npm install cypress
+  - eslint-plugin-cypress
+  - eslint.js env => 'cypress/globals' : true
+  - eslint.js plugins => cypress
+  
+
+  ### OPEN Graph
+  웹 페이지의 메타데이터를 사용해 페이지 콘텐츠 표시를 표준화하기위한 페이스북에서 만든 인터넷 프로토콜
+  
