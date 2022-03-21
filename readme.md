@@ -103,3 +103,7 @@ npm i -D dotenv-webpack
   - eslint.js env => 'cypress/globals' : true
   - eslint.js plugins => cypress
   
+
+  ### OPEN Graph
+  웹 페이지의 메타데이터를 사용해 페이지 콘텐츠 표시를 표준화하기위한 페이스북에서 만든 인터넷 프로토콜
+  
